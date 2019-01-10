@@ -25,10 +25,12 @@ public class LogABCBy3ThreadByTurns extends Thread {
                     count--;
                     self.notify();
                 }
-                try {
-                    prev.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                if (count > 0) {
+                    try {
+                        prev.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
@@ -36,6 +38,9 @@ public class LogABCBy3ThreadByTurns extends Thread {
     }
 
     public static void main(String[] args) {
+        Thread currentThread = Thread.currentThread();
+        System.out.println(currentThread.getName() + " " + currentThread.getId());
+
         byte[] a = new byte[0];//据说，零长度的byte数组对象创建起来将比任何对象都经济
         byte[] b = new byte[0];//查看编译后的字节码：生成零长度的byte[]对象只需3条操作码
         byte[] c = new byte[0];//而Object lock = new Object()则需要7行操作码
@@ -48,8 +53,12 @@ public class LogABCBy3ThreadByTurns extends Thread {
             threadB.start();
             sleep(50);
             threadC.start();
+            threadC.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        System.out.println();
+        System.out.println(currentThread.getName() + " " + currentThread.getId());
     }
 }
