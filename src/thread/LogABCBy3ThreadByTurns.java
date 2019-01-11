@@ -39,7 +39,7 @@ public class LogABCBy3ThreadByTurns extends Thread {
 
     public static void main(String[] args) {
         Thread currentThread = Thread.currentThread();
-        System.out.println(currentThread.getName() + " " + currentThread.getId());
+        System.out.println(currentThread.getName() + " threadId:" + currentThread.getId());
 
         byte[] a = new byte[0];//据说，零长度的byte数组对象创建起来将比任何对象都经济
         byte[] b = new byte[0];//查看编译后的字节码：生成零长度的byte[]对象只需3条操作码
@@ -59,6 +59,6 @@ public class LogABCBy3ThreadByTurns extends Thread {
         }
 
         System.out.println();
-        System.out.println(currentThread.getName() + " " + currentThread.getId());
+        System.out.println(currentThread.getName() + " threadId:" + currentThread.getId());
     }
 }
