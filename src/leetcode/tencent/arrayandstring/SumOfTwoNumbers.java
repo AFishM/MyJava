@@ -1,4 +1,4 @@
-package leetcode.tencent;
+package leetcode.tencent.arrayandstring;
 
 import java.util.Arrays;
 
