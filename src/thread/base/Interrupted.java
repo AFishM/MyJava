@@ -1,4 +1,4 @@
-package thread;
+package thread.base;
 
 /**
  * 观察线程的中断标识位

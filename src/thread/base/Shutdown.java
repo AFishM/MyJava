@@ -1,4 +1,4 @@
-package thread;
+package thread.base;
 
 /**
  * 安全地终止线程
