@@ -1,4 +1,4 @@
-package leetcode.tencent;
+package algorithm.leetcode.tencent;
 
 public class FindMedianSortedArrays {
     public static void main(String[] args) {
