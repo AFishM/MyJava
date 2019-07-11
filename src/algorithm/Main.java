@@ -46,6 +46,18 @@ public class Main {
 //
 //        System.out.println(s3);
 //        System.out.print(new Main().addBinary("100", "110010"));
+
+//        int[] num1 = {1, 3};
+//        int[] num2 = {2};
+//        FindMedianSortedArrays test = new FindMedianSortedArrays();
+//        double result = test.findMedianSortedArrays(num1, num2);
+//        String s="9223372036854775808";
+//        int result=new MyAtoi().myAtoi(s);
+
+//        int[] nums = {-4,-2,1,-5,-4,-4,4,-2,0,4,0,-2,3,1,-5,0};
+//        List<List<Integer>> result=new ThreeSum().threeSum(nums);
+//        System.out.print(result);
+
         int[] nums = {1, 2, 3, 4, 5, 6};
         int k = 2;
         rotate(nums, k);
