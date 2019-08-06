@@ -4,6 +4,17 @@ package algorithm.listnode;
  * Created by xuzixu on 2019/7/22.
  */
 public class Solution {
+    public static void main(String[] args) {
+//        int[] a={4,1,8,4,5};
+//        int[] b={5,0,1,8,4,5};
+//        ListNode listNode=new Solution().getIntersectionNode(ListNode.init(a),ListNode.init(b));
+
+//        int[] c={1,2};
+//        new Solution().removeNthFromEnd(ListNode.init(c),1);
+        int[] a = {1, 2, 3, 4, 5};
+        new Solution().reverseList(ListNode.init(a));
+    }
+
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         if (headA == null || headB == null) {
             return null;
@@ -66,6 +77,61 @@ public class Solution {
             tempNode = tempNode.next;
         }
         preNode.next = targetNode.next;
+        return head;
+    }
+
+    /**
+     * 反转链表
+     * 迭代写法
+     */
+//    public ListNode reverseList(ListNode head) {
+//        ListNode tempNode = head;
+//        head = null;
+//        ListNode nextNode;
+//        while (tempNode != null) {
+//            nextNode = tempNode.next;
+//            tempNode.next = head;
+//            head = tempNode;
+//            tempNode = nextNode;
+//        }
+//        return head;
+//    }
+
+    /**
+     * 反转链表
+     * 递归写法
+     */
+    public ListNode reverseList(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+        return reverseList(head, null);
+    }
+
+    private ListNode reverseList(ListNode node, ListNode head) {
+        ListNode nextNode = node.next;
+        node.next = head;
+        if (nextNode == null) {
+            return node;
+        }
+        return reverseList(nextNode, node);
+    }
+
+    public ListNode removeElements(ListNode head, int val) {
+        ListNode pre = null;
+        ListNode temp = head;
+        while (temp != null) {
+            if (temp.val == val) {
+                if (pre == null) {
+                    head = temp.next;
+                } else {
+                    pre.next = temp.next;
+                }
+            } else {
+                pre = temp;
+            }
+            temp = temp.next;
+        }
         return head;
     }
 }
