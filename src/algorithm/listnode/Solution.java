@@ -134,4 +134,26 @@ public class Solution {
         }
         return head;
     }
+
+    /**
+     * 给定一个单链表，把所有的奇数节点和偶数节点分别排在一起。
+     * 请注意，这里的奇数节点和偶数节点指的是节点编号的奇偶性，而不是节点的值的奇偶性。
+     */
+    public ListNode oddEvenList(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+        ListNode even = head;
+        ListNode odd = head.next;
+        ListNode oddHead = odd;
+        while (odd != null && odd.next != null) {
+            even.next = odd.next;
+            even = even.next;
+            odd.next = even.next;
+            odd = odd.next;
+        }
+        even.next = oddHead;
+
+        return head;
+    }
 }

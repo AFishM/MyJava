@@ -9,7 +9,11 @@ public class Main {
 //        int[] b={5,0,1,8,4,5};
 //        ListNode listNode=new Solution().getIntersectionNode(ListNode.init(a),ListNode.init(b));
 
-        int[] c={1,2};
-        new Solution().removeNthFromEnd(ListNode.init(c),1);
+//        int[] c={1,2};
+//        new Solution().removeNthFromEnd(ListNode.init(c),1);
+
+        int[] a={1,2,3,4,5};
+        ListNode listNode=new Solution().oddEvenList(ListNode.init(a));
+        System.out.println(listNode);
     }
 }
