@@ -134,4 +134,32 @@ public class Solution {
         }
         return head;
     }
+
+    public boolean isPalindrome(ListNode head) {
+        if (head == null || head.next == null) {
+            return true;
+        }
+        ListNode slowNode = head;
+        ListNode fastNode = head.next;
+        ListNode preNode = null;
+        ListNode prePreNode;
+        while (fastNode != null && fastNode.next != null) {
+            prePreNode = preNode;
+            preNode = slowNode;
+            slowNode = slowNode.next;
+            fastNode = fastNode.next.next;
+            preNode.next = prePreNode;
+        }
+        ListNode node1 = slowNode.next;
+        slowNode.next = preNode;
+        ListNode node2 = fastNode == null ? slowNode.next : slowNode;
+        while (node1 != null) {
+            if (node1.val != node2.val) {
+                return false;
+            }
+            node1 = node1.next;
+            node2 = node2.next;
+        }
+        return true;
+    }
 }
