@@ -184,4 +184,100 @@ public class Solution {
 
         return head;
     }
+
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if (l1 == null) {
+            return l2;
+        }
+        if (l2 == null) {
+            return l1;
+        }
+        ListNode head = null;
+        ListNode listNode = null;
+        ListNode temp;
+        while (l1 != null && l2 != null) {
+            if (l1.val < l2.val) {
+                temp = l1;
+                l1 = l1.next;
+            } else {
+                temp = l2;
+                l2 = l2.next;
+            }
+            if (listNode == null) {
+                listNode = temp;
+            } else {
+                listNode.next = temp;
+                listNode = listNode.next;
+            }
+            if (head == null) {
+                head = temp;
+            }
+        }
+        if (l1 == null) {
+            listNode.next = l2;
+        } else {
+            listNode.next = l1;
+        }
+        return head;
+    }
+
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode head = null;
+        ListNode node = null;
+        ListNode temp;
+        int value;
+        boolean add1 = false;
+        while (l1 != null && l2 != null) {
+            value = l1.val + l2.val;
+            if (add1) {
+                value = value + 1;
+            }
+            if (value >= 10) {
+                value = value - 10;
+                add1 = true;
+            } else {
+                add1 = false;
+            }
+            temp = new ListNode(value);
+            if (node == null) {
+                node = temp;
+                head = node;
+            } else {
+                node.next = temp;
+                node = node.next;
+            }
+            l1 = l1.next;
+            l2 = l2.next;
+        }
+        if (l1 == null) {
+            l1 = l2;
+        }
+
+        while (l1 != null) {
+            if (add1) {
+                value = l1.val + 1;
+                if (value >= 10) {
+                    value = value - 10;
+                    add1 = true;
+                } else {
+                    add1 = false;
+                }
+                node.next = new ListNode(value);
+                node = node.next;
+            } else {
+                if (node == null) {
+                    head = l1;
+                } else {
+                    node.next = l1;
+                }
+                break;
+            }
+            l1 = l1.next;
+        }
+        if (add1) {
+            node.next = new ListNode(1);
+        }
+        return head;
+    }
+
 }
