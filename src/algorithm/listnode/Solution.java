@@ -280,4 +280,47 @@ public class Solution {
         return head;
     }
 
+    class Node {
+        public int val;
+        public Node prev;
+        public Node next;
+        public Node child;
+
+        public Node() {
+        }
+
+        public Node(int _val, Node _prev, Node _next, Node _child) {
+            val = _val;
+            prev = _prev;
+            next = _next;
+            child = _child;
+        }
+    }
+
+    public Node flatten(Node head) {
+        flattenWithReturnTail(head);
+        return head;
+    }
+
+    private Node flattenWithReturnTail(Node head) {
+        Node node = head;
+        Node next;
+        Node tail = null;
+        while (node != null) {
+            tail = node;
+            if (node.child != null) {
+                next = node.next;
+                node.next = node.child;
+                node.child.prev = node;
+                Node childTail = flattenWithReturnTail(node.child);
+                if (next != null) {
+                    childTail.next = next;
+                    next.prev = childTail;
+                }
+                node.child = null;
+            }
+            node = node.next;
+        }
+        return tail;
+    }
 }
