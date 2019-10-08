@@ -1,5 +1,7 @@
 package algorithm.listnode;
 
+import java.util.HashMap;
+
 /**
  * Created by xuzixu on 2019/7/22.
  */
@@ -280,47 +282,114 @@ public class Solution {
         return head;
     }
 
+//    class Node {
+//        public int val;
+//        public Node prev;
+//        public Node next;
+//        public Node child;
+//
+//        public Node() {
+//        }
+//
+//        public Node(int _val, Node _prev, Node _next, Node _child) {
+//            val = _val;
+//            prev = _prev;
+//            next = _next;
+//            child = _child;
+//        }
+//    }
+//
+//    public Node flatten(Node head) {
+//        flattenWithReturnTail(head);
+//        return head;
+//    }
+//
+//    private Node flattenWithReturnTail(Node head) {
+//        Node node = head;
+//        Node next;
+//        Node tail = null;
+//        while (node != null) {
+//            tail = node;
+//            if (node.child != null) {
+//                next = node.next;
+//                node.next = node.child;
+//                node.child.prev = node;
+//                Node childTail = flattenWithReturnTail(node.child);
+//                if (next != null) {
+//                    childTail.next = next;
+//                    next.prev = childTail;
+//                }
+//                node.child = null;
+//            }
+//            node = node.next;
+//        }
+//        return tail;
+//    }
+
     class Node {
         public int val;
-        public Node prev;
         public Node next;
-        public Node child;
+        public Node random;
 
         public Node() {
         }
 
-        public Node(int _val, Node _prev, Node _next, Node _child) {
+        public Node(int _val, Node _next, Node _random) {
             val = _val;
-            prev = _prev;
             next = _next;
-            child = _child;
+            random = _random;
         }
     }
 
-    public Node flatten(Node head) {
-        flattenWithReturnTail(head);
+    ;
+
+    public Node copyRandomList(Node head) {
+        if (head == null) {
+            return null;
+        }
+        HashMap<Node, Node> map = new HashMap<>();
+        return copyRandomNode(head, map);
+    }
+
+    private Node copyRandomNode(Node randomNode, HashMap<Node, Node> map) {
+        if (map.containsKey(randomNode)) {
+            return map.get(randomNode);
+        }
+        Node node = new Node();
+        map.put(randomNode, node);
+        node.val = randomNode.val;
+        if (randomNode.next != null) {
+            node.next = copyRandomNode(randomNode.next, map);
+        }
+        if (randomNode.random != null) {
+            node.random = copyRandomNode(randomNode.random, map);
+        }
+        return node;
+    }
+
+    public ListNode rotateRight(ListNode head, int k) {
+        if (head == null) {
+            return null;
+        }
+        ListNode fastNode = head;
+        int length = 1;
+        while (k > 0 && fastNode.next != null) {
+            fastNode = fastNode.next;
+            length++;
+            k = k - 1;
+        }
+        if (k > 0) {
+            k = (k - 1) % length;
+            return rotateRight(head, k);
+        }
+        ListNode slowNode = head;
+        while (fastNode.next != null) {
+            fastNode = fastNode.next;
+            slowNode = slowNode.next;
+        }
+        fastNode.next = head;
+        head = slowNode.next;
+        slowNode.next = null;
         return head;
-    }
-
-    private Node flattenWithReturnTail(Node head) {
-        Node node = head;
-        Node next;
-        Node tail = null;
-        while (node != null) {
-            tail = node;
-            if (node.child != null) {
-                next = node.next;
-                node.next = node.child;
-                node.child.prev = node;
-                Node childTail = flattenWithReturnTail(node.child);
-                if (next != null) {
-                    childTail.next = next;
-                    next.prev = childTail;
-                }
-                node.child = null;
-            }
-            node = node.next;
-        }
-        return tail;
     }
 }
