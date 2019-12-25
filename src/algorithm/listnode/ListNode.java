@@ -7,7 +7,7 @@ public class ListNode {
     int val;
     ListNode next;
 
-    ListNode(int x) {
+    public ListNode(int x) {
         val = x;
         next = null;
     }
@@ -23,6 +23,18 @@ public class ListNode {
             tempNode=tempNode.next;
         }
         return listNode;
+    }
+
+    public int getVal() {
+        return val;
+    }
+
+    public ListNode getNext() {
+        return next;
+    }
+
+    public void setNext(ListNode next) {
+        this.next = next;
     }
 
     @Override
