@@ -1,23 +1,53 @@
 package algorithm.hashmap;
 
-import com.sun.source.tree.Tree;
-
 import java.util.*;
 
 public class Solution {
     public static void main(String[] args) {
-//        System.out.println(new Solution().firstUniqChar("dddccdbba"));
-//        String[] strings = {"abc", "bcd", "acef", "xyz", "az", "ba", "a", "z"};
-//        new Solution().groupStrings(strings);
-        new Solution().lengthOfLongestSubstring("pwwkew");
+        int[] nums = {1};
+
+        new Solution().topKFrequent(nums, 1);
     }
 
-//    public List<Integer> topKFrequent(int[] nums, int k) {
-//        HashMap<Integer,Integer> map=new HashMap<>();
-//        for(int num:nums){
-//            map.put(num,map.getOrDefault(num,0)+1);
-//        }
-//    }
+    public List<Integer> topKFrequent(int[] nums, int k) {
+        int length = nums.length;
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int num;
+        int frequent;
+        for (int i = 0; i < length; i++) {
+            num = nums[i];
+            frequent = map.getOrDefault(num, 0);
+            map.put(num, frequent + 1);
+        }
+        HashSet<Integer>[] temp = new HashSet[length + 1];
+        for (int key : map.keySet()) {
+            frequent = map.get(key);
+            if (frequent != 0) {
+                if (temp[frequent] == null) {
+                    temp[frequent] = new HashSet<>();
+                }
+                temp[frequent].add(key);
+            }
+        }
+        List<Integer> result = new ArrayList<>(k);
+        HashSet<Integer> set;
+        for (int i = length; i > 0; i--) {
+            if ((set = temp[i]) != null) {
+                result.addAll(set);
+                if (result.size() >= k) {
+                    return result;
+                }
+            }
+        }
+        return result;
+    }
+
+    static class Tree {
+        int value;
+        Tree left;
+        Tree right;
+    }
 
     public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
         int length = A.length;
